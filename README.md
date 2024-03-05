@@ -1,8 +1,8 @@
-###  DATE: 
+###  DATE: 5/3/24
 
-###  NAME: 
-###  ROLL NO :
-###  DEPARTMENT: 
+###  NAME: sanjay m
+###  ROLL NO : 212222110038
+###  DEPARTMENT: CSE(IOT)
 
 
 # EXPERIMENT--04-INTERUPT-GENRATION-USING-SENSOR-AND-VISUALIZING-USING-SERIAL-MONITOR
@@ -118,7 +118,39 @@ The diagram below shows how the GPIO pins are connected to the 16 interrupt line
   
 
 ## STM 32 CUBE PROGRAM :
+~~~
+#include "main.h"
+#include "stdio.h"
 
+#if defined (__ICCARM__) || defined (__ARMCC_VERSION)
+#define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
+#elif defined(__GNUC__)
+
+#define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+#endif
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+		if(HAL_GPIO_ReadPin(GPIOB,GPIO_PIN_4)==0)
+		{
+			printf("obstacle found\n");
+			HAL_Delay(500);
+		}
+		else
+		{
+			printf("obstacle not found\n");
+			HAL_Delay(500);
+		}
+}
+
+PUTCHAR_PROTOTYPE
+{
+
+  HAL_UART_Transmit(&huart2, (uint8_t *)&ch, 1, 0xFFFF);
+
+  return ch;
+}
+~~~
 
 
 ## Output screen shots of serial port utility   :
@@ -126,7 +158,13 @@ The diagram below shows how the GPIO pins are connected to the 16 interrupt line
  
  ## Circuit board :
  
- 
- 
+ <img width="555" alt="Screenshot 2024-03-05 at 10 07 30 PM" src="https://github.com/sanjay0208/EXPERIMENT--04-INTERUPT-GENRATION-USING-SENSOR-AND-VISUALIZING-USING-SERIAL-MONITOR/assets/119406959/69f15460-2cc6-412f-879f-cfa3618e5554">
+
+<img width="607" alt="Screenshot 2024-03-05 at 10 08 51 PM" src="https://github.com/sanjay0208/EXPERIMENT--04-INTERUPT-GENRATION-USING-SENSOR-AND-VISUALIZING-USING-SERIAL-MONITOR/assets/119406959/67a23419-13b1-459b-83b6-8bba14105df0">
+
+<img width="677" alt="Screenshot 2024-03-05 at 10 11 25 PM" src="https://github.com/sanjay0208/EXPERIMENT--04-INTERUPT-GENRATION-USING-SENSOR-AND-VISUALIZING-USING-SERIAL-MONITOR/assets/119406959/51446c28-b290-48d0-ab49-6b7131ffdf51">
+
+ <img width="1067" alt="Screenshot 2024-03-05 at 10 10 13 PM" src="https://github.com/sanjay0208/EXPERIMENT--04-INTERUPT-GENRATION-USING-SENSOR-AND-VISUALIZING-USING-SERIAL-MONITOR/assets/119406959/239bdf5a-92c3-44a1-84ee-50dae99fd6d7">
+
 ## Result :
 Interfacing a  IR SENSOR and interrupt is generated using external interrupt mode , visualized on serial port 
